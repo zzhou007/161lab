@@ -1,0 +1,88 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    15:09:00 01/06/2016 
+-- Design Name: 
+-- Module Name:    my_alu - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+--use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity my_alu is
+generic(NUMBITS : natural := 8);
+    Port ( A : in  STD_LOGIC_VECTOR(NUMBITS-1 downto 0);	
+           B : in  STD_LOGIC_VECTOR(NUMBITS-1 downto 0);
+           opcode : in  STD_LOGIC_VECTOR(2 downto 0);
+           result : out  STD_LOGIC_VECTOR(NUMBITS-1 downto 0);
+           carryout : out  STD_LOGIC;
+           overflow : out  STD_LOGIC;
+           zero : out  STD_LOGIC);
+end my_alu;
+
+architecture Behavioral of my_alu is
+begin
+
+	process (A, B, opcode)
+	begin
+
+	if opcode = "000" then
+		--unsinged add
+		result <= std_logic_vector( unsigned(A) + unsigned(B) );
+		
+	elsif opcode = "001" then
+		--singed add
+		result <= std_logic_vector( A + B );
+	
+	elsif opcode = "010" then
+		--unsigned sub
+		result <= std_logic_vector( unsigned(A) + ( (not unsigned(B)) + 1 ) );
+	
+	elsif opcode = "011" then
+		--signed sub
+		result <= std_logic_vector( A + ( (not B) + 1 ) );
+	
+	elsif opcode = "100" then
+		--bit wise AND
+		result <= A AND B;
+	
+	elsif opcode = "101" then
+		--bit wise OR
+		result <= A OR B;
+	
+	elsif opcode = "110" then
+		--bit wise XOR
+		result <= A XOR B;
+	
+	else
+		--Divide A by 2
+		result <= std_logic_vector( unsigned(A) / 2 );
+	
+	end if;
+		
+	end process;
+end Behavioral;
+
