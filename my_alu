@@ -44,7 +44,7 @@ generic(NUMBITS : natural := 8);
 end my_alu;
 
 architecture Behavioral of my_alu is
-signal stuff: std_logic_vector(NUMBITS-1 downto 0);
+signal stuff: std_logic_vector(NUMBITS downto 0);
 begin
 
 	process (A, B, opcode)
@@ -52,18 +52,8 @@ begin
 
 	if opcode = "000" then
 		--unsinged add
-		stuff <= std_logic_vector( unsigned(A) + unsigned(B) );
-		result <= stuff;
-		if stuff(NUMBTIS - 1) = 0 && (A(NUMBITS - 1) = 1 || B(NUMBITS - 1) = 1) then
-			overflow <= '1';
-			carryout <= '1';
-		else
-			overflow <= '0';
-			carryout <= '0';
-		end if;
-		
-		if stuff(NUMBITS - 1 downto 0) = 0then
-			--zero <= 1;
+		stuff <= std_logic_vector( unsigned(A)  + unsigned(B));
+		result <= stuff;		
 		
 	elsif opcode = "001" then
 		--singed add
@@ -95,6 +85,6 @@ begin
 	
 	end if;
 		
-	end process;
+end process;
+	
 end Behavioral;
-
