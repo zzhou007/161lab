@@ -8,7 +8,7 @@ Mark Asfour
 Kenneth Chan
 
 ###Remarks
-division is unsigned 
+Division is unsigned. 
 
 ###Bugs
 We tested and nothing was wrong
