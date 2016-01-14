@@ -1,11 +1,13 @@
-# README
-# Group
-Mark Asfour
-Kenneth Chan
+#README
+###Leader
 Zihang Zhou
 
-#ALU
+###Group
+Mark Asfour
+Kenneth Chan
+
+###Remarks
 division is unsigned 
 
-#incomplete
+###Bugs
 We tested and nothing was wrong
