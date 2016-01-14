@@ -47,41 +47,129 @@ architecture Behavioral of my_alu is
 signal stuff: std_logic_vector(NUMBITS downto 0);
 begin
 
-	process (A, B, opcode)
+	process (A, B, opcode, stuff)
 	begin
 
+	--UNSIGNED ADD
 	if opcode = "000" then
-		--unsinged add
-		stuff <= std_logic_vector( unsigned(A)  + unsigned(B));
-		result <= stuff;		
+		stuff <= std_logic_vector( ('0' & unsigned(A) ) + ( '0' & unsigned(B)));
+		result <= stuff(NUMBITS-1 downto 0);		
+		overflow <= '0';
+		carryout <= stuff(NUMBITS);
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
 		
+	--SIGNED ADD	
 	elsif opcode = "001" then
-		--singed add
-		result <= std_logic_vector( A + B );
+		stuff <= std_logic_vector( signed('0' & A) + signed('0' & B) );
+		result <= stuff(NUMBITS-1 downto 0);		
+		
+		if (A(NUMBITS-1) = '0') and (B(NUMBITS-1) = '0') and (stuff(NUMBITS-1) = '1') then
+			overflow <= '1';
+		elsif (A(NUMBITS-1) = '1') and (B(NUMBITS-1) = '1') and (stuff(NUMBITS-1) = '0') then
+			overflow <= '1';
+		else
+			overflow <= '0';
+		end if;
+
+		carryout <= '0';
+		
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
 	
+	--UNSIGNED SUB
 	elsif opcode = "010" then
-		--unsigned sub
-		result <= std_logic_vector( unsigned(A) + ( (not unsigned(B)) + 1 ) );
+		stuff <= std_logic_vector( ('0' & unsigned(A) ) + ( '0' & ((not unsigned(B)) + 1)));
+		result <= stuff(NUMBITS-1 downto 0);		
+		
+		overflow <= '0';
+		
+		if stuff(NUMBITS) = '0' then
+			carryout <= '1';
+		else
+			carryout <= '0';
+		end if;
+		
+		if stuff(NUMBITS - 1 downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
 	
+	--SIGNED SUB
 	elsif opcode = "011" then
-		--signed sub
-		result <= std_logic_vector( A + ( (not B) + 1 ) );
-	
+		stuff <= std_logic_vector( ('0' & signed(A) ) + ( '0' & ((not signed(B)) + 1)));
+		result <= stuff(NUMBITS-1 downto 0);		
+		
+		if (A(NUMBITS-1) = '0') and (B(NUMBITS-1) = '1') and (stuff(NUMBITS-2) = '1') then
+			overflow <= '1';
+		elsif (A(NUMBITS-1) = '1') and (B(NUMBITS-1) = '0') and (stuff(NUMBITS-2) = '0') then
+			overflow <= '1';
+		else
+			overflow <= '0';
+		end if;
+
+		carryout <= '0';
+		
+		if stuff(NUMBITS - 1 downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
+
+	--BITWISE AND
 	elsif opcode = "100" then
-		--bit wise AND
-		result <= A AND B;
-	
+		stuff <= std_logic_vector(('0' & A) AND ('0' & B));
+		result <= stuff(NUMBITS-1 downto 0);
+		overflow <= '0';
+		carryout <= '0';
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
+		
+	--BITWISE OR
 	elsif opcode = "101" then
-		--bit wise OR
-		result <= A OR B;
-	
+		stuff <= std_logic_vector(('0' & A) OR ('0' & B));
+		result <= stuff(NUMBITS-1 downto 0);
+		overflow <= '0';
+		carryout <= '0';
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
+
+	--BITWUS XOR
 	elsif opcode = "110" then
-		--bit wise XOR
-		result <= A XOR B;
+		stuff <= std_logic_vector(('0' & A) XOR ('0' & B));
+		result <= stuff(NUMBITS-1 downto 0);
+		overflow <= '0';
+		carryout <= '0';
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
 	
 	else
 		--Divide A by 2
-		result <= std_logic_vector( unsigned(A) / 2 );
+		stuff <= std_logic_vector( unsigned(A) / 2 );
+		result <= stuff(NUMBITS-1 downto 0);
+		overflow <= '0';
+		carryout <= '0';
+		if stuff(NUMBITS downto 0) = 0 then
+			zero <= '1';
+		else
+			zero <= '0';
+		end if;
 	
 	end if;
 		
