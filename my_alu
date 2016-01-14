@@ -161,7 +161,7 @@ begin
 	
 	else
 		--Divide A by 2
-		stuff <= std_logic_vector( unsigned(A) / 2 );
+		stuff <= std_logic_vector( ('0' & unsigned(A)) / 2 );
 		result <= stuff(NUMBITS-1 downto 0);
 		overflow <= '0';
 		carryout <= '0';
