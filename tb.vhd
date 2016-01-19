@@ -83,7 +83,116 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
+		-- unsigned add
+		opcode <= "000";
+		A <= "00000000";
+		B <= "00000000";
 		
+		wait for 100 ns;
+		
+		opcode <= "000";
+		A <= "11000100";
+		B <= "00000000";
+		
+		wait for 100 ns;
+		
+		--- signed add
+		opcode <= "001";
+		A <= "00000000";
+		B <= "00000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "001";
+		A <= "01000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "001";
+		A <= "11000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		--unsigned sub
+		
+		opcode <= "010";
+		A <= "01000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "010";
+		A <= "00000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		--signed sub
+		
+		opcode <= "011";
+		A <= "01000100";
+		B <= "01000000";
+		
+		
+		wait for 100 ns;
+		
+		opcode <= "011";
+		A <= "00000100";
+		B <= "00000100";
+		
+		wait for 100 ns;
+		
+		opcode <= "011";
+		A <= "00000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		--and
+		
+		opcode <= "100";
+		A <= "01000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "100";
+		A <= "00000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		--or
+		
+		opcode <= "100";
+		A <= "01000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "100";
+		A <= "00000000";
+		B <= "00000000";
+		
+		wait for 100 ns;
+		
+		--xor
+		
+		opcode <= "110";
+		A <= "01000100";
+		B <= "01000000";
+		
+		wait for 100 ns;
+		
+		opcode <= "110";
+		A <= "00000000";
+		B <= "00000000";
+		
+		wait for 100 ns;
+		
+		--divide by 2
 		opcode <= "111";
 		A <= "00000100";
 		
