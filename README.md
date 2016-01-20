@@ -3,7 +3,8 @@
 Zihang Zhou
 
 ###Group
-Mark Asfour //
+Mark Asfour
+
 Kenneth Chan
 
 ###Remarks
