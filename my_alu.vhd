@@ -54,8 +54,9 @@ begin
 	if opcode = "000" then
 		stuff <= std_logic_vector( ('0' & unsigned(A) ) + ( '0' & unsigned(B)));
 		result <= stuff(NUMBITS-1 downto 0);		
-		overflow <= '0';
+		--carryout <= '1';
 		carryout <= stuff(NUMBITS);
+		overflow <= stuff(NUMBITS);
 		if stuff(NUMBITS downto 0) = 0 then
 			zero <= '1';
 		else
@@ -74,10 +75,10 @@ begin
 		else
 			overflow <= '0';
 		end if;
-
-		carryout <= '0';
 		
-		if stuff(NUMBITS downto 0) = 0 then
+		carryout <= stuff(NUMBITS);
+		
+		if stuff(NUMBITS - 1 downto 0) = 0 then
 			zero <= '1';
 		else
 			zero <= '0';
@@ -88,9 +89,9 @@ begin
 		stuff <= std_logic_vector( ('0' & unsigned(A) ) + ( '0' & ((not unsigned(B)) + 1)));
 		result <= stuff(NUMBITS-1 downto 0);		
 		
-		overflow <= '0';
+		overflow <= stuff(NUMBITS - 1);
 		
-		if stuff(NUMBITS) = '0' then
+		if stuff(NUMBITS - 1) = '0' then
 			carryout <= '1';
 		else
 			carryout <= '0';
@@ -115,7 +116,7 @@ begin
 			overflow <= '0';
 		end if;
 
-		carryout <= '0';
+		carryout <= stuff(NUMBITS);
 		
 		if stuff(NUMBITS - 1 downto 0) = 0 then
 			zero <= '1';
