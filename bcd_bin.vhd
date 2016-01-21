@@ -5,7 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity bcd_bin is
 generic(NUMBITS : natural := 32);
-    Port ( I : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);	
+    Port ( I : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);
+			  opcode : in STD_LOGIC_VECTOR (3 downto 0);
            O : out  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0));
 end bcd_bin;
 
@@ -35,9 +36,27 @@ architecture Behavioral of bcd_bin is
 		--ALU 
 		process (I)
 		begin
-		O <= std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
-										(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
-										(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
-										(unsigned(T6) * 1000000) + (unsigned(T7) * 100000000));
+			--if unsigned
+			if (opcode = "1000" or opcode = "1001") then
+				O <= std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
+											(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
+											(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
+											(unsigned(T6) * 1000000) + (unsigned(T7) * 100000000));
+			--if signed
+			else 
+				--if pos
+				if T7 = "0000" then
+					O <= std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
+											(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
+											(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
+											(unsigned(T6) * 1000000));
+				--if neg
+				else
+					O <= not (std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
+											(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
+											(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
+											(unsigned(T6) * 1000000))) + 1;
+				end if;
+			end if;
 	end process;	
 end Behavioral;
