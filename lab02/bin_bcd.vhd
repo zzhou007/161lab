@@ -11,4 +11,3 @@ generic(NUMBITS : natural := 32);
 end bcd_bin;
 
 architecture Behavioral of bin_bcd is
-
