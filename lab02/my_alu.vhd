@@ -2,6 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use work.all;
 
 entity my_alu is
 generic(NUMBITS : natural := 32);
@@ -14,42 +15,35 @@ generic(NUMBITS : natural := 32);
            zero : out  STD_LOGIC);
 end my_alu;
 
-signal Aout : std_logic_vector(NUMBITS -1 downto 0);
-signal Bout : std_logic_vector(NUMBITS -1 downto 0);
-signal Rout : std_logic_vector(NUMBITS -1 downto 0);
 
-architecture structural of my_alu is
-	
-	bcd_binA:bcd_bin
-	port map (
-		I => A;
-		opcode => opcode;
-		O => Ain;
+architecture behavior of my_alu is 
+
+signal Aout : std_logic_vector(NUMBITS -1 downto 0); --
+signal Bout : std_logic_vector(NUMBITS -1 downto 0); --
+signal Rout : std_logic_vector(NUMBITS -1 downto 0); -- final ans
+
+begin
+
+bcd_binA : entity work.bcd_bin port map (
+		I => A,
+		opcode => opcode,
+		O => Aout
+);
+
+bcd_binB : entity work.bcd_bin port map (
+		I => B,
+		opcode => opcode,
+		O => Bout
+);
+
+alu : entity work.bin_alu port map (
+		A => Aout,
+		B => Bout,
+		opcode => opcode,
+		overflow => overflow,
+		carryout => carryout,
+		zero => zero,
+		result => Rout
 	);
-	
-	bcd_binB:bcd_bin
-	port map (
-		I => B;
-		opcode => opcode;
-		O => Bin;
-	);
-	
-	alu:bin_alu
-	port map (
-		A => Ain;
-		B => Bin;
-		opcode => opcode;
-		overflow => overflow;
-		carryout => carryout;
-		zero => zero;
-		result => Rout;
-	);
-	
-	bin_bcdOut:bin_bcd
-	port map (
-		I => Rout;
-		opcode => opcode;
-		O => result;
-	);
-	
-end architecture structural;
+
+end;
