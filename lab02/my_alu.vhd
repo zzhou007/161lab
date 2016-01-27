@@ -45,5 +45,11 @@ alu : entity work.bin_alu port map (
 		zero => zero,
 		result => Rout
 	);
+	
+to_bcd : entity work.bin_bcd port map (
+		I => Rout,
+		opcode => opcode,
+		O => result
+);
 
 end;
