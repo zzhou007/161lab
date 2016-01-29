@@ -84,11 +84,54 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100 ns.
-      wait for 100 ns;	
+		wait for 10 ns;
+		
+		--add value will go to new n+3 digit
+		opcode <= "1000";
+		A <= "10010000000000000000000000000000";
+		B <= "00011000000000000000000000000101";
+      wait for 10 ns;
+		
+		--add value will not go to new n+3 digit
+		opcode <= "1000";
+		A <= "00010000000000000000000000000000";
+		B <= "00011000000000000000000000000101";
+		wait for 10 ns;
+		
+		--signed add value will be 0
+		opcode <= "1100";
+		A <= "00000000000000001000000000000101";
+		B <= "00010000000000001000000000000101";
+		wait for 10 ns;
+		
+		--signed add value will be +
+		opcode <= "1100";
+		A <= "10010000000000000000000000000000";
+		B <= "00001000000000000000000000000101";
+      wait for 10 ns;	
+		
+		--signed add value will be -
+		opcode <= "1100";
+		A <= "10010000000000000000000000000000";
+		B <= "00011000000000000000000000000101";
+		wait for 10 ns;
+		
+		--unsigned sub value will be 0
+		opcode <= "1001";
+		A <= "10011000000000000000000000000101";
+		B <= "10011000000000000000000000000101";
+      wait for 10 ns;	
+		
+		--unsigned sub value will be +
+		opcode <= "1001";
+		A <= "10011000000000000000000000000101";
+		B <= "00011000000000000000000000000101";
+      wait for 10 ns;	
 
-
-      -- insert stimulus here 
+		--unsigned sub value will be 1
+		opcode <= "1001";
+		A <= "00011000000000000000000000000101";
+		B <= "10011000000000000000000000000101";
 
       wait;
    end process;
