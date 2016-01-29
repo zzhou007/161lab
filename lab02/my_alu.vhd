@@ -20,7 +20,7 @@ architecture behavior of my_alu is
 
 signal Aout : std_logic_vector(NUMBITS -1 downto 0); --
 signal Bout : std_logic_vector(NUMBITS -1 downto 0); --
-signal Rout : std_logic_vector(NUMBITS -1 downto 0); -- final ans
+signal Rout : std_logic_vector(NUMBITS -1 downto 0); -- 
 
 begin
 
