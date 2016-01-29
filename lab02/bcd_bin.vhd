@@ -36,7 +36,7 @@ architecture Behavioral of bcd_bin is
 		T6 <= I(27 downto 24);
 		T7 <= I(31 downto 28);
 
-		process (I, T0, T1, T2, T3, T4, T5, T6, T7)
+		process (opcode, T0, T1, T2, T3, T4, T5, T6, T7)
 		variable Tint : integer;
 		begin
 			--stores the bin when adding all the sections together
@@ -65,7 +65,7 @@ architecture Behavioral of bcd_bin is
 							to_integer(unsigned(T2)) * 100 + to_integer(unsigned(T3)) * 1000 +
 							to_integer(unsigned(T4)) * 10000 + to_integer(unsigned(T5)) * 100000 +
 							to_integer(unsigned(T6)) * 1000000);
-					O <= not (conv_std_logic_vector(Tint, NUMBITS)) + 1;
+					O <= (not (conv_std_logic_vector(Tint, NUMBITS))) + 1;
 				
 				end if;
 			end if;
