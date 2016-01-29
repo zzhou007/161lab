@@ -44,19 +44,29 @@ architecture Behavioral of bcd_bin is
 							to_integer(unsigned(T4) * 10000) + to_integer(unsigned(T5) * 100000) +
 							to_integer(unsigned(T6) * 1000000) + to_integer(unsigned(T7) * 10000000));
 				O <= std_logic_vector(to_unsigned(Tint, NUMBITS));
-				--O <= std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + (unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
-				--							(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
-					--						(unsigned(T6) * 1000000) + (unsigned(T7) * 10000000));
+				
 			--if signed
 			else 
 				--if pos
 				if T7 = "0000" then
+					Tint <= (to_integer(unsigned(T0)) + to_integer(unsigned(T1) * 10) +
+							to_integer(unsigned(T2) * 100) + to_integer(unsigned(T3) * 1000) +
+							to_integer(unsigned(T4) * 10000) + to_integer(unsigned(T5) * 100000) +
+							to_integer(unsigned(T6) * 1000000));
+					O <= std_logic_vector(to_unsigned(Tint, NUMBITS));
+				
 					--O <= std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
 					--						(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
 					--						(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
 					--						(unsigned(T6) * 1000000));
 				--if neg
 				else
+					Tint <= (to_integer(unsigned(T0)) + to_integer(unsigned(T1) * 10) +
+							to_integer(unsigned(T2) * 100) + to_integer(unsigned(T3) * 1000) +
+							to_integer(unsigned(T4) * 10000) + to_integer(unsigned(T5) * 100000) +
+							to_integer(unsigned(T6) * 1000000));
+					O <= not (std_logic_vector(to_unsigned(Tint, NUMBITS))) + 1;
+				
 					--O <= not (std_logic_vector(unsigned(T0) + (unsigned(T1) * 10) + 
 					--						(unsigned(T2) * 100) + (unsigned(T3) * 1000) + 
 					--						(unsigned(T4) * 10000) + (unsigned(T5) * 100000) + 
