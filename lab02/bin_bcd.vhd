@@ -15,62 +15,56 @@ end bin_bcd;
 
 
 architecture Behavioral of bin_bcd is
-
+	signal test : std_logic_vector(67 downto 0);
 	begin
-	
-		process(I)
-			variable i1 : integer:=0;
-			variable bcd : std_logic_vector(35 downto 0) := (others => '0');
-			variable bint : std_logic_vector(31 downto 0) := std_logic_vector(I);
+
+		process(I, test)
+			variable bcd : std_logic_vector(67 downto 0);
+			
 
 		begin
-			for i1 in 0 to 31 loop  -- repeating 8 times.
-				bcd(35 downto 1) := bcd(34 downto 0);  --shifting the bits.
-				bcd(0) := bint(31);
-				bint(31 downto 1) := bint(30 downto 0);
-				bint(0) :='0';
-
-
-				if(i1 < 31 and bcd(3 downto 0) > "0100") then --add 3 if BCD digit is greater than 4.
-					bcd(3 downto 0) := bcd(3 downto 0) + "0011";
+			bcd := "000000000000000000000000000000000000"&std_logic_vector(I);
+			
+			for i1 in 0 to 31 loop  -- repeating 32 times.
+				bcd(67 downto 1) := bcd(66 downto 0);  --shifting the bits.
+				if(i1 < 31 and bcd(35 downto 32) > "0100") then --add 3 if BCD digit is greater than 4.
+					bcd(35 downto 32) := bcd(35 downto 32) + "0011";
 				end if;
 
-				if(i1 < 31 and bcd(7 downto 4) > "0100") then --add 3 if BCD digit is greater than 4.
-					bcd(7 downto 4) := bcd(7 downto 4) + "0011";
+				if(i1 < 31 and bcd(39 downto 36) > "0100") then --add 3 if BCD digit is greater than 4.
+					bcd(39 downto 36) := bcd(39 downto 36) + "0011";
 				end if;
 
-				if(i1 < 31 and bcd(11 downto 8) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(11 downto 8) := bcd(11 downto 8) + "0011";
+				if(i1 < 31 and bcd(43 downto 40) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(43 downto 40) := bcd(43 downto 40) + "0011";
 				end if;
 				
-				if(i1 < 31 and bcd(15 downto 12) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(15 downto 12) := bcd(15 downto 12) + "0011";
+				if(i1 < 31 and bcd(47 downto 44) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(47 downto 44) := bcd(47 downto 44) + "0011";
 				end if;
 				
-				if(i1 < 31 and bcd(19 downto 16) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(19 downto 16) := bcd(19 downto 16) + "0011";
+				if(i1 < 31 and bcd(51 downto 48) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(51 downto 48) := bcd(51 downto 48) + "0011";
 				end if;
 
-				if(i1 < 31 and bcd(23 downto 20) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(23 downto 20) := bcd(23 downto 20) + "0011";
+				if(i1 < 31 and bcd(55 downto 52) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(55 downto 52) := bcd(55 downto 52) + "0011";
 				end if;
 				
-				if(i1 < 31 and bcd(27 downto 24) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(27 downto 24) := bcd(27 downto 24) + "0011";
+				if(i1 < 31 and bcd(59 downto 56) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(59 downto 56) := bcd(59 downto 56) + "0011";
 				end if;
 				
-				if(i1 < 31 and bcd(31 downto 28) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(31 downto 28) := bcd(31 downto 28) + "0011";
+				if(i1 < 31 and bcd(63 downto 60) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(63 downto 60) := bcd(63 downto 60) + "0011";
 				end if;
 				
-				if(i1 < 31 and bcd(35 downto 31) > "0100") then  --add 3 if BCD digit is greater than 4.
-					bcd(35 downto 31) := bcd(35 downto 31) + "0011";
+				if(i1 < 31 and bcd(67 downto 64) > "0100") then  --add 3 if BCD digit is greater than 4.
+					bcd(67 downto 64) := bcd(67 downto 64) + "0011";
 				end if;
-
+			
 			end loop;
-			
-			O <= bcd;
-			
+			O <= bcd(67 downto 32);
 		end process;
 
 
