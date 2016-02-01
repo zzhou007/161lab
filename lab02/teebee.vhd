@@ -128,10 +128,29 @@ BEGIN
 		B <= "00011000000000000000000000000101";
       wait for 10 ns;	
 
-		--unsigned sub value will be 1
+		--unsigned sub value will be -
 		opcode <= "1001";
 		A <= "00011000000000000000000000000101";
 		B <= "10011000000000000000000000000101";
+		wait for 10 ns;
+
+		--signed sub value will be 0
+		opcode <= "1101";
+		A <= "00001000000000000000000000000101";
+		B <= "00001000000000000000000000000101";
+		wait for 10 ns;
+
+		--signed sub value will be 0
+		opcode <= "1101";
+		A <= "00011000000000000000000000000101";
+		B <= "00011000000000000000000000000101";
+		wait for 10 ns;
+		
+		--signed sub value will be 5
+		opcode <= "1101";
+		A <= "00001000000000000000000000000101";
+		B <= "00001000000000000000000000000000";
+		wait for 10 ns;
 
       wait;
    end process;
