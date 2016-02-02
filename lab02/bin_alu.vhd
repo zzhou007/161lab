@@ -6,7 +6,9 @@ library work;
 
 entity bin_alu is
 generic(NUMBITS : natural := 32);
-    Port ( A : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);	
+    Port ( Atemp : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);
+			  Btemp : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);
+			  A : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);	
            B : in  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);
            opcode : in  STD_LOGIC_VECTOR(3 downto 0);
            result : out  STD_LOGIC_VECTOR(NUMBITS - 1 downto 0);
@@ -20,7 +22,7 @@ architecture Behavioral of bin_alu is
 	signal stuff: std_logic_vector(NUMBITS downto 0);
 	begin
 
-	process (A, B, opcode, stuff)
+	process (A, B, opcode, stuff, Atemp, Btemp)
 	begin
 	--UNSIGNED ADD
 	if opcode = "1000" then
@@ -28,7 +30,7 @@ architecture Behavioral of bin_alu is
 		result <= stuff(NUMBITS-1 downto 0);		
 		--carryout <= '1';
 		carryout <= stuff(NUMBITS);
-		overflow <= stuff(NUMBITS);
+		overflow <= '0';
 		if stuff(NUMBITS downto 0) = 0 then
 			zero <= '1';
 		else
@@ -40,13 +42,7 @@ architecture Behavioral of bin_alu is
 		stuff <= std_logic_vector( signed('0' & A) + signed('0' & B) );
 		result <= stuff(NUMBITS-1 downto 0);		
 		
-		if (A(NUMBITS-1) = '0') and (B(NUMBITS-1) = '0') and (stuff(NUMBITS-1) = '1') then
-			overflow <= '1';
-		elsif (A(NUMBITS-1) = '1') and (B(NUMBITS-1) = '1') and (stuff(NUMBITS-1) = '0') then
-			overflow <= '1';
-		else
-			overflow <= '0';
-		end if;
+		overflow <= '0';
 		
 		carryout <= stuff(NUMBITS);
 		
@@ -61,7 +57,9 @@ architecture Behavioral of bin_alu is
 		stuff <= std_logic_vector( ('0' & unsigned(A) ) + ( '0' & ((not unsigned(B)) + 1)));
 		result <= stuff(NUMBITS-1 downto 0);		
 		
-		overflow <= stuff(NUMBITS - 1);
+		if (Atemp < Btemp) then
+			overflow <= '1';
+		end if;
 		
 		if stuff(NUMBITS - 1) = '0' then
 			carryout <= '1';
