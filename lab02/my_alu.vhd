@@ -37,6 +37,8 @@ bcd_binB : entity work.bcd_bin port map (
 );
 
 alu : entity work.bin_alu port map (
+		Atemp => A,
+		Btemp => B,
 		A => Aout,
 		B => Bout,
 		opcode => opcode,
