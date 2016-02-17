@@ -34,11 +34,13 @@ begin
 						alu_out <= "0001";
 					when "101010" => --slt
 						alu_out <= "0111";
+					when "100111" => --NOR
+						alu_out <= "1100";
 					when others => --bad input
-						alu_out <= "0000";
+						alu_out <= "XXXX";
 				end case;
 			when others => --bad input
-				alu_out <= "0000";
+				alu_out <= "XXXX";
 			end case;
 		end process;
 end Behavioral;
