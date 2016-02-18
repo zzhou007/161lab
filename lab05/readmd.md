@@ -8,8 +8,7 @@ Zihang Zhou
 Kenneth Chan
 
 ###Remarks
-We implemented the control unit based on the provided tables. 
-We also implemented the ALU control. 
+We made a very sexy processor
 
 ###Bugs
 We are not aware of any bugs
