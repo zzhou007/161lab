@@ -56,6 +56,16 @@ begin
                 mem_write <= '0';
                 branch <= '1';
                 alu_op <= "01";
+            when "001000" =>
+            -- Add immediate
+				reg_dst		<= '1';
+				alu_src 		<= '1';
+				mem_to_reg 	<= '0';
+				reg_write 	<= '1';
+				mem_read 	<= '0';
+				mem_write 	<= '0';
+				branch 		<= '0';
+				alu_op 		<= "00";
             when others =>
         end case;
     end process;
