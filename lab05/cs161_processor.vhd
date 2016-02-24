@@ -2,7 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use work.cpu_component_library.all;
 use IEEE.numeric_std.all;
- 
+
+-- this is entity
 entity cs161_processor is
   port (
     clk            : in std_logic;
@@ -20,6 +21,7 @@ entity cs161_processor is
     );
 end cs161_processor;
  
+ --our processor 
 architecture Behavioral of cs161_processor is
    --PC and IR
     signal pcout       : std_logic_vector(31 downto 0) := (others => '0');
@@ -115,8 +117,7 @@ begin
   
     -- Control Unit
     CONTROLLER: control_unit
-        port map (opCode, muxRegDst,branch,memRead,muxMemReg,aluOp,memWrite,muxAluSrc,
-            regWrite);
+        port map (opCode, muxRegDst,branch,memRead,muxMemReg,aluOp,memWrite,muxAluSrc,regWrite);
   
     RDMUX: mux_2_1
         generic map(5)
@@ -149,7 +150,6 @@ begin
  
     aluZero <= branch and aluZero;
     
-     
     PCMUX: mux_2_1
     generic map (32)
      port map (
@@ -167,5 +167,6 @@ begin
     reg2_data <= regRead2;
     write_reg_addr <= writeregnum;
     write_reg_data <= writeregdata;
-     
+  
+  --maybe compile
 end Behavioral;
