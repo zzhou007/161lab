@@ -1,6 +1,7 @@
-all: cache.cc run
+all: run
+	./cache < trace
 	g++ cache.cc -o cache
 clean:
 	rm cache
-run:
-	./cache < trace
+run: cache.cc
+	g++ cache.cc -o cache
