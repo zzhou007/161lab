@@ -25,7 +25,7 @@ architecture Behavioral of cs161_processor is
 	signal ctrlbr			:std_logic := '0';
 	signal aluop			:std_logic_vector(1 downto 0) := (others => '0');
 	signal aluout			:std_logic_vector(3 downto 0) := (others => '0');
-	signal aluResult 		:std_logic_vector(31 downto 0) := (others => '0');
+	signal aluResult 	:std_logic_vector(31 downto 0) := (others => '0');
 	signal aluzero			:std_logic := '0';
 	signal earth 			:std_logic := '0';
 	signal talumux			:std_logic_vector(31 downto 0) := (others => '0');
@@ -40,7 +40,7 @@ architecture Behavioral of cs161_processor is
 	signal pcnew 			:std_logic_vector(7 downto 0) :=(others => '0');
 	signal muxreg 			:std_logic_vector(4 downto 0) := (others => '0');
 	signal muxdat 			:std_logic_vector (31 downto 0) := (others => '0');
-	signal aluReadB 		:std_logic_vector (31 downto 0) := (others => '0');
+	signal aluReadB 			:std_logic_vector (31 downto 0) := (others => '0');
 	signal aluReadA		:std_logic_vector (31 downto 0) := (others => '0');
 	signal regread2		:std_logic_vector (31 downto 0) := (others => '0');
 	signal ctrlw 			:std_logic := '0';
@@ -99,8 +99,8 @@ begin
 			);
 		
 	Registers : cpu_registers
-			clk						=> clk,
 		port map(
+			clk						=> clk,
 			rst						=> rst,
 			reg_write				=> ctrlrw,
 			read_register_1		=> memory_out(25 downto 21),
