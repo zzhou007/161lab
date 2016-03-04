@@ -1,0 +1,3 @@
+vhdl work "../../Downloads/161lab-master/lab05/cpu_constant_library.vhd"
+vhdl work "../../Downloads/161lab-master/lab05/alu_control.vhd"
+vhdl work "../../Downloads/161lab-master/lab05/cpu_components.vhd"

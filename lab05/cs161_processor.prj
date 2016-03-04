@@ -1,0 +1,4 @@
+vhdl work "../../Downloads/lab05/cpu_constant_library.vhd"
+vhdl work "../../Downloads/lab05/cpu_component_library.vhd"
+vhdl work "../../Downloads/lab05/cpu_components.vhd"
+vhdl work "../../Downloads/lab05/cs161_processor.vhd"

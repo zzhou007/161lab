@@ -1,0 +1,84 @@
+Release 14.6 - xst P.68d (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/csmajs/masfo001/Desktop/marker/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Parameter xsthdpdir set to /home/csmajs/masfo001/Desktop/marker/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Reading design: control_unit.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/csmajs/masfo001/Downloads/161lab-master/lab05/cpu_constant_library.vhd" into library work
+Parsing package <cpu_constant_library>.
+Parsing package body <cpu_constant_library>.
+Parsing VHDL file "/home/csmajs/masfo001/Downloads/161lab-master/lab05/control_unit.vhd" into library work
+Parsing entity <control_unit>.
+Parsing architecture <Behavioral> of entity <control_unit>.
+Parsing VHDL file "/home/csmajs/masfo001/Downloads/161lab-master/lab05/alu_control.vhd" into library work
+Parsing entity <alu_control>.
+Parsing architecture <Behavioral> of entity <alu_control>.
+Parsing VHDL file "/home/csmajs/masfo001/Downloads/161lab-master/lab05/cpu_components.vhd" into library work
+Parsing entity <generic_register>.
+Parsing architecture <Behavioral> of entity <generic_register>.
+Parsing entity <mux_2_1>.
+Parsing architecture <Behavioral> of entity <mux_2_1>.
+Parsing entity <cpu_registers>.
+Parsing architecture <Behavioral> of entity <cpu_registers>.
+Parsing entity <alu>.
+Parsing architecture <Behavioral> of entity <alu>.
+Parsing entity <memory>.
+Parsing architecture <Behavioral> of entity <memory>.
+Parsing entity <alu_control>.
+Parsing architecture <Behavioral> of entity <alu_control>.
+WARNING:HDLCompiler:686 - "/home/csmajs/masfo001/Downloads/161lab-master/lab05/cpu_components.vhd" Line 270: Overwriting existing secondary unit behavioral
+Parsing entity <control_unit>.
+WARNING:HDLCompiler:685 - "/home/csmajs/masfo001/Downloads/161lab-master/lab05/cpu_components.vhd" Line 305: Overwriting existing primary unit control_unit
+Parsing architecture <Behavioral> of entity <control_unit>.
+
+
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 3.53 secs
+ 
+--> 
+
+
+Total memory usage is 423524 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    2 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+
